@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDown, Heart, ShoppingCart, User } from "react-feather";
 
 interface NavBarProps {
   navComponents: { name: string; linkId: string }[];
@@ -13,22 +14,22 @@ export default function NavBar(props: NavBarProps) {
 
   const features: {
     featureName: string;
-    featureIcon: string;
+    featureIcon: React.ReactNode;
     featureLink: string;
   }[] = [
     {
       featureName: "LikedItems",
-      featureIcon: "fa-solid fa-heart",
+      featureIcon: <Heart />,
       featureLink: "",
     },
     {
       featureName: "Cart",
-      featureIcon: "fa-solid fa-cart-shopping",
+      featureIcon: <ShoppingCart />,
       featureLink: "",
     },
     {
       featureName: "Profile",
-      featureIcon: "fa-solid fa-user",
+      featureIcon: <User />,
       featureLink: "",
     },
   ];
@@ -38,8 +39,8 @@ export default function NavBar(props: NavBarProps) {
   console.log(openDepartment);
 
   return (
-    <div className="flex items-center p-4 gap-10">
-      <div className="flex justify-between items-center w-1/2">
+    <div className="flex items-center justify-between gap-10 py-4 px-6">
+      <div className="flex items-center gap-10">
         <h1 className="text-3xl font-bold">ByteCart</h1>
         {navComponents.map((component) => (
           <a key={component.name} href={component.linkId}>
@@ -47,38 +48,49 @@ export default function NavBar(props: NavBarProps) {
           </a>
         ))}
       </div>
-      <div className="flex justify-between items-center w-1/2">
-        <div className="flex items-center border-black border-2 rounded-full px-4 py-2">
+      <div className="flex items-center gap-5">
+        <div className="flex gap-4 rounded-lg border-2 border-black px-4 py-2">
           <p>{selectedDepartment}</p>
-          <div className="relative inline-block">
-            <button onClick={() => {
-              setOpenDepartment(!openDepartment)
-            }}>
-              <i className="fa-solid fa-chevron-down"></i>
+          <div className="relative flex">
+            <button
+              onClick={() => {
+                setOpenDepartment(!openDepartment);
+              }}
+            >
+              <ChevronDown />
             </button>
             <ul
               className={
                 (openDepartment ? "block" : "hidden") +
-                " absolute bg-white rounded-lg shadow-md p-4"
+                " absolute -left-[92px] top-10 rounded-md border-2 border-black bg-white p-2"
               }
             >
-              {departments.map((department) => (
-                <li className="hover:bg-gray-300">
-                  <button key={department} onClick={() => {
-                    setSelectedDepartment(department)
-                    setOpenDepartment(!openDepartment)
-                    }}>{department}</button>
+              {departments.map((department, index) => (
+                <li className="rounded-md px-4 hover:bg-gray-300" key={index}>
+                  <button
+                    key={department}
+                    onClick={() => {
+                      setSelectedDepartment(department);
+                      setOpenDepartment(!openDepartment);
+                    }}
+                  >
+                    {department}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
-          <input type="text" placeholder="search"></input>
+          <input type="text" placeholder="Search"></input>
         </div>
-        <button className="border-black border-2 rounded-full px-4 py-2">Sell Your Item</button>
-        <div className="p-4">
+        <button className="button px-4">Sell Your Item</button>
+        <div className="py-4 flex">
           {features.map((feature) => (
-            <a key={feature.featureName} href={feature.featureLink}>
-              <i className={feature.featureIcon}></i>
+            <a
+              className="pl-4"
+              key={feature.featureName}
+              href={feature.featureLink}
+            >
+              {feature.featureIcon}
             </a>
           ))}
         </div>
