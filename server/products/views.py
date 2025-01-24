@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from .models import Product
+from products.models import Product
+from django.template import loader
 
 def product(product_id):
     return HttpResponse(f'Products Loaded!')
@@ -12,6 +13,10 @@ def review(request, product_id):
     return HttpResponse(f"You're reviewing product {product_id}") 
 
 def index(request):
-    latest_product_list = Product.objects.order_by("product_id")[:5]
-    output = ", ".join([q.product_name for q in latest_product_list])
+    latest_product_list = Product.objects.order_by("id")
+    template = loader.get_template("products/index.html")
+    context = {
+        "latest_product_list": latest_product_list,
+    } 
+    return HttpResponse(template.render(context, request))
 # Create your views here.

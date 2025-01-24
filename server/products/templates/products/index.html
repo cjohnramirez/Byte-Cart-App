@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Product Template</title>
+    <meta charset="utf-8" /> 
+  </head>
+  <body>
+    {% if latest_product_list %}
+    <ul>
+      {% for product in latest_product_list %}
+      <li>
+        <a href="/products/{{ product.id }}/">{{ product.product_name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Product does not exist</p>
+    {% endif %}
+  </body>
+</html>
