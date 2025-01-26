@@ -20,4 +20,4 @@ class ProductReviews(models.Model):
   product_rating = models.IntegerField(default=0)
 
   def __str__(self):
-    return self.product_rating
+    return str(self.product)
