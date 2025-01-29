@@ -23,7 +23,6 @@ class Discount(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100, blank=False, default='unnamed_product')
     desc = models.CharField(max_length=150, blank=True, default='no_product_desc')
-    SKU = models.CharField(max_length=100, blank=True, unique=True)
 
     #verbose field name
     unit_price_cents = models.IntegerField("unit_price")
