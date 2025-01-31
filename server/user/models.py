@@ -10,7 +10,7 @@ class User(models.Model):
   created_at = models.DateTimeField(auto_now=True)
   modified_at = models.DateTimeField(auto_now_add=True)
 
-  owner = models.ForeignKey('auth.User', related_name='users', on_delete=models.CASCADE)
+  owner = models.ForeignKey('auth.User', related_name='user', on_delete=models.CASCADE)
 
 class UserAddress(models.Model):
   user_id = models.ForeignKey(
@@ -37,7 +37,8 @@ class UserPayment(models.Model):
   PAYMENT_TYPES = {
     'CR': 'Credit',
     'DB': 'Debit',
-    'DG': 'Digital'
+    'DG': 'Digital',
+    'CD': 'Cash on Delivery'
   }
   
   payment_type = models.CharField(
@@ -49,7 +50,8 @@ class UserPayment(models.Model):
     'PPL': 'PayPal',
     'BDO': 'BDO',
     'GCH': 'GCash',
-    'MTC': 'MasterCard'
+    'MTC': 'MasterCard',
+    'COD': 'Cash on Delivery',
   }
   
   provider = models.CharField(
