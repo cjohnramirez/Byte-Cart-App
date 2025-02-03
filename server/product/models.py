@@ -1,6 +1,5 @@
 from django.db import models
 
-#actual model
 class ProductCategory(models.Model):
     name = models.CharField(max_length=100, blank=False, default='unnamed_category')
     desc = models.CharField(max_length=1000, blank=False, default='no_category_desc')
@@ -24,13 +23,11 @@ class Product(models.Model):
     name = models.CharField(max_length=100, blank=False, default='unnamed_product')
     desc = models.CharField(max_length=150, blank=True, default='no_product_desc')
 
-    #verbose field name
     unit_price_cents = models.IntegerField("unit_price")
     created_at = models.DateTimeField(auto_now=True)
     modified_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
 
-    #many-to-one relationship
     category_id = models.ForeignKey(
         ProductCategory, 
         on_delete=models.CASCADE,
@@ -49,4 +46,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
