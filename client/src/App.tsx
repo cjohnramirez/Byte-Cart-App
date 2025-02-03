@@ -1,17 +1,11 @@
-import NavBar from "./components/NavBar";
+import { ThemeProvider } from "@/components/theme-provider"
+import LoginPage from "./LoginPage"
 
 function App() {
-  const navComponents: { name: string, linkId: string }[] = [
-    { name: "Promotions", linkId: "" },
-    { name: "Products", linkId: "" },
-    { name: "Offers", linkId: "" },
-    { name: "About", linkId: "" },
-  ];
-
   return (
-    <div>
-      <NavBar navComponents={navComponents}/>
-    </div>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <LoginPage />
+    </ThemeProvider>
   )
 }
 

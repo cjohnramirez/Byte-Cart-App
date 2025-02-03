@@ -1,14 +1,18 @@
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework import routers
 
-from product import views
+from . import views as api_views
+from product import views as product_views
 
 router = routers.DefaultRouter()
-router.register(r'product', views.ProductViewSet)
-router.register(r'product_category', views.ProductCategoryViewSet)
-router.register(r'discount', views.DiscountViewSet)
+router.register(r'product', product_views.ProductViewSet)
+router.register(r'product_category', product_views.ProductCategoryViewSet)
+router.register(r'discount', product_views.DiscountViewSet)
 
 urlpatterns = [
+  re_path('signup', api_views.signup),
+  re_path('login', api_views.login),
+  re_path('test_token', api_views.test_token),
   path('', include(router.urls)),
   path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .button {
-    @apply rounded-md border-2 border-black px-4 py-2;
-  }
-}
-
 @layer base {
   :root {
 
